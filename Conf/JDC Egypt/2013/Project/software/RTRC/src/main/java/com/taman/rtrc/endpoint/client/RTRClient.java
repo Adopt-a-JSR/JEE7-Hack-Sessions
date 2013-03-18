@@ -21,6 +21,7 @@ import org.glassfish.tyrus.client.ClientManager;
 /**
  *
  * @author mohamed_taman
+ * @since 1.0.
  */
 @ClientEndpoint
 public class RTRClient {
