@@ -1,6 +1,0 @@
-com\taman\rtrc\endpoint\server\RTRCServer.class
-com\taman\rtrc\endpoint\data\MessageConverter.class
-com\taman\rtrc\endpoint\data\RunnerMessage.class
-com\taman\rtrc\endpoint\data\Message.class
-com\taman\rtrc\endpoint\data\LoginMessage.class
-com\taman\rtrc\endpoint\client\RTRClient.class
