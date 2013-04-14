@@ -3,15 +3,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eg.com.taman</groupId>
     <artifactId>RTRC</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5-BETA</version>
     <packaging>war</packaging>
     
-    <name>RTRC</name>
-    <description>RTRC (Real Time Runners Champion)</description>
+    <name>RTRC (Beta)</name>
+    <description>Real Time Runners Champion Web Application</description>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server>
     </properties>
 
     <repositories>
@@ -79,7 +79,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.6</version>
@@ -103,7 +103,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

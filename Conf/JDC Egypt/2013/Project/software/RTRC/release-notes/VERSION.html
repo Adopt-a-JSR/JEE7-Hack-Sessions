@@ -1,0 +1,53 @@
+  <!doctype html>
+  <html>
+  <head>
+  <style>
+  .smallFontSize{
+	  font-size:10pt;
+  }
+  h5{
+	font-size:11pt;  
+  }
+  
+  body{
+	  font-family:'Trebuchet MS', 'Courier New', Calibri, Arial, sans-serif;
+  }
+  </style>
+  <meta charset="utf-8">
+  <title>RTRC Release Notice for version 1.5 Beta</title>
+  </head>
+  <body>
+  <h3>Release notice of all RTRC (Real Time Runners Champion) versions.</h3>
+  <hr/>
+  <h4>Version: 2.0.0 (dd-mm-yyyy)</h4>
+  <h5>Description:</h5>
+  <blockquote class="smallFontSize">
+  New major version
+  </blockquote>
+ <hr/>
+ <Strong>History</Strong>
+ <hr/> 
+  <h4>Version 1.5-BETA. (14-04-2013)</h4>
+  <h5>Fixes:</h5>
+  <ol class="smallFontSize">
+    <li>Fix <strong>RTRCServer</strong> to use one text message decoder/encoder.</li>
+    <li>Merge two text message  decoders to be one decoder as described in latest specification.</li>
+    <li>Fix to implement  decoders/encoders  <strong><em>destroy()</em></strong> and <strong><em>init(EndpointConfig ec)</em></strong> methods.</li>
+    <li>Refactoring classes and  methods names class's hierarchy, for the sake of clarity.</li>
+    <li>Refactoring the test cases  to reflects the last changes done on the project.<br></li>
+    <li>Fix <strong>RTRCServer</strong> to reflect the last PFD v1.0 of the specification, as the server has two text  message handlers annotated with 
+		<strong><em>@OnMessage</em></strong>, now it becomes one  message handler per type, in my case text message.</li>
+  </ol>
+  <h5>New features:</h5>
+  <ol class="smallFontSize">
+    <li>Add JavaDoc comments for  all classes, especially main classes.</li>
+  </ol>
+  <h5>Improvements:</h5>
+  <ol class="smallFontSize">
+    <li>Updated <strong>pom.xml</strong> file  to include the latest updated version of JEE7 repo libs b84 and Tyrus b1.0-rc2.</li>
+  </ol>
+  <h5>Other:</h5>
+  <div class="smallFontSize" style="padding-left:20px">N/A</div>
+  </span>
+  </body>
+  </html>
