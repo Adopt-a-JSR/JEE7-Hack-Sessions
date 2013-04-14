@@ -1,34 +1,35 @@
 package com.taman.rtrc.endpoint.server;
 
-import com.taman.rtrc.endpoint.data.LoginMessage;
-import com.taman.rtrc.endpoint.data.LoginMessageDecoder;
-import com.taman.rtrc.endpoint.data.RunnerMessage;
-import com.taman.rtrc.endpoint.data.RunnerMessageConverter;
+import com.taman.rtrc.endpoint.data.Message;
+import com.taman.rtrc.endpoint.data.MessageConverter;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.websocket.DeploymentException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import static javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import javax.websocket.server.ServerEndpointConfigurator;
-import org.glassfish.tyrus.server.Server;
 
 /**
- *
+ * Class RTRC (Real Time Runners Champion) server endpoint, is a Websocket based,
+ * which is responsible for runners registration, and notifications for all new runners,
+ * with newly registered runners alongside the de-registration of runner when connection
+ * is lost with notification for all runners.
+ * 
  * @author mohamed_taman
+ * @since v1.0
+ * @version 1.2
  */
 @ServerEndpoint(value = "/server/register",
-        decoders = {RunnerMessageConverter.class, LoginMessageDecoder.class},
-        encoders = {RunnerMessageConverter.class},
-        configurator = ServerEndpointConfigurator.class)
+        decoders = {MessageConverter.class},
+        encoders = {MessageConverter.class} )
 public class RTRCServer {
 
     final static Logger logger = Logger.getLogger(RTRCServer.class.getName());
+    
     private static ConcurrentHashMap<String, Session> runners = new ConcurrentHashMap<>();
 
     @OnOpen
@@ -42,18 +43,21 @@ public class RTRCServer {
     }
 
     @OnMessage
-    public void handleMessage(RunnerMessage msg) {
+    public void processMessage(Message msg, Session runner) {
+        
         logger.info(msg.toString());
 
-        broadcast(msg);
+        //register(null);
+        
+        //broadcast(msg);
+        
     }
+    
+    private boolean register(Session runner) {
 
-    @OnMessage
-    public boolean doLogin(LoginMessage msg, Session runner) {
-
-        logger.info(msg.toString());
-
-        runners.put(msg.getUsername(), runner);
+//        logger.info(msg.toString());
+//
+//        runners.put(msg.getUsername(), runner);
 
         logger.log(Level.INFO, "Current runneres = {0}", runners.size());
 
@@ -75,11 +79,11 @@ public class RTRCServer {
         logger.log(Level.INFO, "Current runneres = {0}", runners.size());
 
         if (username != null) {
-            // this.addToTranscriptAndNotify(username, " has just left...rather abruptly !");
+            // this.notifyAll(username, " has just left...rather abruptly !");
         }
     }
 
-    private void broadcast(RunnerMessage msg) {
+    private void broadcast(Message msg) {
         logger.info("Broadcasting updated user list");
 
         for (Session nextSession : runners.values()) {
@@ -90,22 +94,5 @@ public class RTRCServer {
                 logger.log(Level.WARNING, "Error updating a client {0} : {1}", new Object[]{remote, ioe.getMessage()});
             }
         }
-    }
-
-    public static void main(String[] args) throws DeploymentException {
-
-        Server server = new Server("localhost", 2020, "/RTRC", RTRCServer.class);
-
-        try {
-            server.start();
-            System.out.println("Press any key to exit");
-            System.in.read();
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, null, ex);
-        } finally {
-            server.stop();
-            System.out.println("Server stopped.");
-        }
-
     }
 }

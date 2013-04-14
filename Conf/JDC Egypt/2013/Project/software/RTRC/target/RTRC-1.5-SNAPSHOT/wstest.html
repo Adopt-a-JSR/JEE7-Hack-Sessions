@@ -1,0 +1,67 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Test Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>
+           
+    var name;
+    
+    var log = function(s) {
+                if (document.readyState !== "complete") {
+                    log.buffer.push(s);
+                } else {
+                    document.getElementById("output").textContent += (s + "\n")
+                }
+            }
+            log.buffer = [];
+
+            if (this.MozWebSocket) {
+                WebSocket = MozWebSocket;
+            }
+
+            url = "ws://localhost:2020/RTRC/server/register";
+            w = new WebSocket(url);
+            w.onopen = function() {
+                log("open");
+                // set the type of binary data messages to ArrayBuffer
+                w.binaryType = "arraybuffer";
+
+                // send one string and one binary message when the socket opens
+                w.send("thank you for accepting this Web Socket request");
+                var a = new Uint8Array([8, 6, 7, 5, 3, 0, 9]);
+                w.send(a.buffer);
+            }
+            w.onmessage = function(e) {
+                log(e.data.toString());
+            }
+            w.onclose = function(e) {
+                log("closed");
+            }
+            w.onerror = function(e) {
+                log("error");
+            }
+
+            window.onload = function() {
+                log(log.buffer.join("\n"));
+                document.getElementById("sendButton").onclick = function() {
+                    w.send(document.getElementById("inputMessage").value);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type="text" id="inputMessage" value="Hello, Web Socket!"><button id="sendButton">Send</button>
+        <pre id="output"></pre>
+    </body>
+</html>
+
+
+
+
+
+

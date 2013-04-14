@@ -14,7 +14,7 @@ import javax.json.JsonReader;
  *
  * @author mohamed_taman
  */
-public class LoginMessage {
+public class LoginMessage extends Message {
     
     private String username;
     
@@ -36,7 +36,7 @@ public class LoginMessage {
         this.password = password;
     }
 
-    public static LoginMessage fromJSON(String jsonValue) {
+    public static Message fromJSON(String jsonValue) {
 
         LoginMessage msg = new LoginMessage();
 

@@ -1,54 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.taman.rtrc</groupId>
+    <groupId>eg.com.taman</groupId>
     <artifactId>RTRC</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.5-SNAPSHOT</version>
     <packaging>war</packaging>
-
+    
     <name>RTRC</name>
-
+    <description>RTRC (Real Time Runners Champion)</description>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
     </properties>
 
-    <dependencies>
-         <dependency>
+    <repositories>
+        <repository> 
+            <id>Java EE 7 Repo.</id> 
+            <url>https://maven.java.net/content/groups/promoted/</url>
+        </repository>
+    </repositories> 
+    <dependencies>        
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.json</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        <dependency>  
+            <groupId>javax</groupId>  
+            <artifactId>javaee-api</artifactId>  
+            <version>7.0-b84</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Use this dependency becoause it is contains RI + Imple -->
+        <dependency>  
+            <groupId>org.glassfish</groupId> 
+            <artifactId>javax.json</artifactId> 
+            <version>1.0-SNAPSHOT</version> 
             <type>jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-client</artifactId>
-            <version>1.0-b12</version>
+            <version>1.0-rc2</version>
             <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-core</artifactId>
-            <version>1.0-b12</version>
-             <type>jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-container-grizzly</artifactId>
-            <version>1.0-b12</version>
+            <version>1.0-rc2</version>
             <type>jar</type>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -91,7 +96,7 @@
                                 <artifactItem>
                                     <groupId>javax</groupId>
                                     <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>6.0</version>
+                                    <version>7.0-b84</version>
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
@@ -101,5 +106,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -15,7 +15,8 @@ public class RunnerMessageTest {
 
     private final String jsonValue = "{\"name\":\"Mohamed\",\"longitude\":1.233333334,\"latitude\":2.333333,"
             + "\"timestamp\":123222233433,\"notes\":\"I am notes\"}";
-    private final RunnerMessage instance = new RunnerMessage("Mohamed", 1.233333334d, 2.333333d, 123222233433l, "I am notes");
+    
+    private final Message instance = new RunnerMessage("Mohamed", 1.233333334d, 2.333333d, 123222233433l, "I am notes");
 
     public RunnerMessageTest() {
     }

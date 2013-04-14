@@ -29,7 +29,7 @@ public class LoginMessageTest {
         expResult.setUsername("Mohamed.taman@gmail.com");
         expResult.setPassword("xxxxx");
         
-        LoginMessage result = LoginMessage.fromJSON(jsonValue);
+        Message result = LoginMessage.fromJSON(jsonValue);
         
         assertEquals(expResult, result);
        

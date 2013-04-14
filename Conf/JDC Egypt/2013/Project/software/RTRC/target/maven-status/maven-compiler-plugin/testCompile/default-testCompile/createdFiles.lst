@@ -1,0 +1,5 @@
+com\taman\rtrc\endpoint\server\RTRCServerTest.class
+com\taman\rtrc\endpoint\data\LoginMessageTest.class
+com\taman\rtrc\endpoint\server\RTRCServerTest$RTRClientLogin.class
+com\taman\rtrc\endpoint\server\RTRCServerTest$RTRClientRunnerData.class
+com\taman\rtrc\endpoint\data\RunnerMessageTest.class

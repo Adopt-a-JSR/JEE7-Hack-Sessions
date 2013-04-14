@@ -1,26 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.taman.rtrc.endpoint.client;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.ClientEndpoint;
-import javax.websocket.DeploymentException;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import org.glassfish.tyrus.client.ClientManager;
 
 /**
- *
+ * 
  * @author mohamed_taman
+ * @version 1.2
  */
 @ClientEndpoint
 public class RTRClient {
@@ -43,18 +35,5 @@ public class RTRClient {
     public void onMessage(String message) {
 
         logger.info(message);
-    }
-
-    public static void main(String[] args) {
-        ClientManager client = ClientManager.createClient();
-        messageLatch = new CountDownLatch(1);
-
-        try {
-            client.connectToServer(new RTRClient(), new URI("ws://localhost:2020/RTRC/server/register"));
-            messageLatch.await(5, TimeUnit.SECONDS);
-        } catch (URISyntaxException | DeploymentException | InterruptedException e) {
-            logger.log(Level.SEVERE, null, e);
-        }
-
     }
 }

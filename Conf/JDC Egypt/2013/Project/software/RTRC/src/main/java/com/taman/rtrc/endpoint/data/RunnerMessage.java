@@ -17,7 +17,7 @@ import javax.json.JsonWriter;
  *
  * @author mohamed_taman
  */
-public class RunnerMessage {
+public class RunnerMessage extends Message {
 
     private String name;
     private double longitude;
@@ -76,6 +76,7 @@ public class RunnerMessage {
         this.notes = notes;
     }
 
+    @Override
     public String toJSON() {
 
         String result = null;
@@ -100,7 +101,7 @@ public class RunnerMessage {
         return result;
     }
 
-    public static RunnerMessage fromJSON(String jsonValue) {
+    public static Message fromJSON(String jsonValue) {
 
         RunnerMessage data = new RunnerMessage();
 
