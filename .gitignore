@@ -1,1 +1,21 @@
+# use glob syntax.
+syntax: glob
+*.class
+*~
+*.bak
+*.off
+*.old
+.DS_Store
+
+# building
 /Conf/JDC Egypt/2013/Project/software/RTRC/target/
+
+# Eclipse config files
+.classpath
+.project
+.settings
+
+# IDEA config files
+*.iml
+*.ipr
+*.iws
