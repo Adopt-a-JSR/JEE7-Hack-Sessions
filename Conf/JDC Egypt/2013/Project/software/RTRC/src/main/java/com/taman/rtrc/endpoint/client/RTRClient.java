@@ -13,6 +13,7 @@ import javax.websocket.Session;
  * 
  * @author mohamed_taman
  * @version 1.2
+ * @since 1.0.
  */
 @ClientEndpoint
 public class RTRClient {
