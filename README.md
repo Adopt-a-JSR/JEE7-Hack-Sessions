@@ -2,11 +2,15 @@
 
 This repository contains all my hack sessions, projects and conferences materials.
 
-###1- Projects INformation
+###1- Projects Information
 
-    1.1- RTRC (Real Time Runners Champion) project:
+##### 1.1- RTRC (Real Time Runners Champion) project:
+    1.1.1- Prerequisites to run the apps.
+     1.1.1.1- Netbeans 7.3+.
+      1.1.1.2- JDK 7+.
 
-      1.1.1 - Added the release-notice.html to reflect all changeds done on each released version.
+    1.1.2- Important change notes:
+     1.1.2.1 Added the release-notice.html to reflect all changeds done on each released version.
 
 -----
 
