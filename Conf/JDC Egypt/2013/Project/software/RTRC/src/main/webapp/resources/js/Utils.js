@@ -46,26 +46,26 @@ function checkHTML5Features() {
             WebSocket = MozWebSocket;
         }
     }
-    
+
     document.getElementById("disconnect").onclick = function() {
-            socket.close();
-            document.getElementById("loginBtn").disabled = true;
-            document.getElementById("connectBtn").disabled = false;
-            document.getElementById("username").value = "";
-            document.getElementById("password").value = "";
-            document.getElementById("loginContainer").style = "display: anything";
+        socket.close();
+        document.getElementById("loginBtn").disabled = true;
+        document.getElementById("connectBtn").disabled = false;
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("loginContainer").style = "display: anything";
         document.getElementById("geoContainer").style = "display: none";
         document.getElementById("otherRunners").innerHTML = "";
-          
+
         login = true;
-        };
-    
- document.getElementById("sendData").onclick = function() {
-             navigator.geolocation.watchPosition(updateLocation, handleLocationError,
+    };
+
+    document.getElementById("sendData").onclick = function() {
+        navigator.geolocation.watchPosition(updateLocation, handleLocationError,
                 {timeout: 1000});
-        };
-    
-        document.getElementById("connectBtn").onclick = function() {
+    };
+
+    document.getElementById("connectBtn").onclick = function() {
         // websocket definition and event messages
         socket = new WebSocket(url);
 
@@ -73,10 +73,11 @@ function checkHTML5Features() {
 
             document.getElementById("loginBtn").disabled = false;
             document.getElementById("connectBtn").disabled = true;
-            
+
         };
 
         socket.onmessage = function(e) {
+            alert(e.data.toString());
             parseMessage(e.data.toString());
 
         };
@@ -108,19 +109,19 @@ function disableButton() {
 
 function parseMessage(message) {
 
-if(login){
-    if (message === 'true') {
-        document.getElementById("loginContainer").style = "display: none";
-        document.getElementById("geoContainer").style = "display: anything";
-        document.getElementById("info").innerHTML = "";
-        login = false;
-        
+    if (login) {
+        if (message === 'true') {
+            document.getElementById("loginContainer").style = "display: none";
+            document.getElementById("geoContainer").style = "display: anything";
+            document.getElementById("info").innerHTML = "";
+            login = false;
+
+        } else {
+            log(message);
+        }
     } else {
-        log(message);
-    }
-}else{
         logRunners(message);
-}
+    }
 }
 
 
@@ -171,15 +172,15 @@ function updateLocation(position) {
     var accuracy = position.coords.accuracy;
     var timestamp = position.timestamp;
 
-    var message = "{\"name\":\""+username+"\",\"longitude\":"+longitude+",\"latitude\":"+latitude+","
-                + "\"timestamp\":"+timestamp+",\"notes\":\"Accuracy = "+accuracy+"\"}";
-    
+    var message = "{\"name\":\"" + username + "\",\"longitude\":" + longitude + ",\"latitude\":" + latitude + ","
+            + "\"timestamp\":" + timestamp + ",\"notes\":\"Accuracy = " + accuracy + "\"}";
+
     document.getElementById("latitude").innerHTML = "Latitude: " + latitude;
     document.getElementById("longitude").innerHTML = "Longitude: " + longitude;
     document.getElementById("accuracy").innerHTML = "Accuracy: " + accuracy + " meters";
     document.getElementById("timestamp").innerHTML = "Timestamp: " + timestamp;
 
-        socket.send(message);
+    socket.send(message);
 
     // sanity test... don't calculate distance if accuracy
     // value too large

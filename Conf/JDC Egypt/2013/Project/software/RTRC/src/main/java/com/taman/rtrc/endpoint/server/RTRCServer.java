@@ -47,7 +47,7 @@ public class RTRCServer {
         
         logger.info(msg.toString());
 
-        //register(null);
+        register(null);
         
         //broadcast(msg);
         

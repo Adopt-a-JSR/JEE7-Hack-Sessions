@@ -6,75 +6,77 @@
         <link rel="stylesheet" href="resources/css/html5.css"/>
         <script type="text/javascript" src="resources/js/Utils.js"></script>
     </head>
-    <body onload="checkHTML5Features();disableButton();">
+    <body onload="checkHTML5Features();
+            disableButton();">
         <header>
             <h1>HTML5 RTRC Application</h1>
             <h4>Live Race Data!</h4>
         </header>
         <div id="loginContainer">
-        <section>
-            <article>
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2" style="text-align: left">Login here:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><label for="username">Username *</label></td>
-                            <td><input id="username" type="email" required autofocus placeholder="your email here!!"  /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="password">Password *</label></td>
-                            <td><input id="password" type="password" title="Password is required" required maxlength="10" placeholder="password"/></td>
-                        </tr>
-                        <tr>
-                            <td><button id="connectBtn">Connect</button></td>
-                            <td><button id="loginBtn">Login</button></td>
+            <section>
+                <article>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="text-align: left">Login here:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><label for="username">Username *</label></td>
+                                <td><input id="username" type="email" required autofocus placeholder="your email here!!"  /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password">Password *</label></td>
+                                <td><input id="password" type="password" title="Password is required" required maxlength="10" placeholder="password"/></td>
+                            </tr>
+                            <tr>
+                                <td><button id="connectBtn">Connect</button></td>
+                                <td><button id="loginBtn">Login</button></td>
 
-                        </tr>
-                    </tbody>
-                </table>
-                <div id="log" style="display: none">
-                    <h3>Log</h3>
-                    <div id="info">
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="log" style="display: none">
+                        <h3>Log</h3>
+                        <div id="info">
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-        </section> 
+            </section> 
         </div>
         <div id="geoContainer" style="display: none">
-  
-  <section>
-    <article>
-      <header>
-        <h5>Your Location</h5>
-      </header>
-      <div class="geostatus">
-          <div>
-              <button id="sendData">Update & Send your data</button>
-              <button id="disconnect">Disconnect</button>
-          </div>
-          <p id="name">You: </p>
-        <p id="latitude">Latitude: </p>
-        <p id="longitude">Longitude: </p>
-        <p id="accuracy">Accuracy: </p>
-        <p id="timestamp">Timestamp: </p>
-      </div>
-        <header style="margin-top: 4px;">
-        <h5>Other Runners</h5>
-      </header>
-        <div class="otherstatus" id="otherRunners">
-        
-      </div>
-    </article>
-  </section>
-  </div>
+
+            <section>
+                <article>
+                    <header>
+                        <h5>Your Location</h5>
+                    </header>
+                    <div class="geostatus">
+                        <div>
+                            <button id="sendData">Update & Send your data</button>
+                            <button id="disconnect">Disconnect</button>
+                        </div>
+                        <p id="name">You: </p>
+                        <p id="latitude">Latitude: </p>
+                        <p id="longitude">Longitude: </p>
+                        <p id="accuracy">Accuracy: </p>
+                        <p id="timestamp">Timestamp: </p>
+                    </div>
+                    <header style="margin-top: 4px;">
+                        <h5>Other Runners</h5>
+                    </header>
+                    <div class="otherstatus" id="otherRunners">
+
+                    </div>
+                </article>
+            </section>
+        </div>
         <footer>
             <h2>Powered by: HTML5, Websocket, Geolocation and Form APIs </h2>
-            <h2>            Oracle Glassfish v4_b78, Websocket API JSR(356)</h2>
+            <h2>            Oracle Glassfish v4_b84, Websocket API JSR(356)</h2>
+            <h2>            & JSON API JSR(353)</h2>
         </footer>
     </body>
 </html>
