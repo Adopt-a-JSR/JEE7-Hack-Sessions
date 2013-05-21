@@ -38,6 +38,7 @@ and open the template in the editor.
             }
             w.onmessage = function(e) {
                 log(e.data.toString());
+                document.getElementById("inputMessage").value = "";
             }
             w.onclose = function(e) {
                 log("closed");
@@ -55,7 +56,7 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-        <input type="text" id="inputMessage" value="Hello, Web Socket!"><button id="sendButton">Send</button>
+        <input type="text" id="inputMessage"><button id="sendButton">Send</button>
         <pre id="output"></pre>
     </body>
 </html>

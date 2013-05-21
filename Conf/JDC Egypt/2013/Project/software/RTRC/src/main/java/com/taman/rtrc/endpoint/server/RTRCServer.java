@@ -1,7 +1,9 @@
 package com.taman.rtrc.endpoint.server;
 
+import com.taman.rtrc.endpoint.data.LoginMessage;
 import com.taman.rtrc.endpoint.data.Message;
 import com.taman.rtrc.endpoint.data.MessageConverter;
+import com.taman.rtrc.endpoint.data.RunnerMessage;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -14,22 +16,21 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 /**
- * Class RTRC (Real Time Runners Champion) server endpoint, is a Websocket based,
- * which is responsible for runners registration, and notifications for all new runners,
- * with newly registered runners alongside the de-registration of runner when connection
- * is lost with notification for all runners.
- * 
+ * Class RTRC (Real Time Runners Champion) server endpoint, is a Websocket
+ * based, which is responsible for runners registration, and notifications for
+ * all new runners, with newly registered runners alongside the de-registration
+ * of runner when connection is lost with notification for all runners.
+ *
  * @author mohamed_taman
  * @since v1.0
  * @version 1.2
  */
 @ServerEndpoint(value = "/server/register",
         decoders = {MessageConverter.class},
-        encoders = {MessageConverter.class} )
+        encoders = {MessageConverter.class})
 public class RTRCServer {
 
     final static Logger logger = Logger.getLogger(RTRCServer.class.getName());
-    
     private static ConcurrentHashMap<String, Session> runners = new ConcurrentHashMap<>();
 
     @OnOpen
@@ -44,20 +45,25 @@ public class RTRCServer {
 
     @OnMessage
     public void processMessage(Message msg, Session runner) {
+
+        logger.info(msg.toString());
         
+        //String loginMessage = Boolean.FALSE.toString();
+
+        if (msg.size() == 2){ 
+            register(LoginMessage.class.cast(msg),runner).toString();
+        }else{
+            broadcast(RunnerMessage.class.cast(msg));
+        }
+        
+        // return loginMessage;
+    }
+
+    private Boolean register(LoginMessage msg, Session runner) {
+
         logger.info(msg.toString());
 
-        register(null);
-        
-        //broadcast(msg);
-        
-    }
-    
-    private boolean register(Session runner) {
-
-//        logger.info(msg.toString());
-//
-//        runners.put(msg.getUsername(), runner);
+        runners.put(msg.getUsername(), runner);
 
         logger.log(Level.INFO, "Current runneres = {0}", runners.size());
 
@@ -83,13 +89,14 @@ public class RTRCServer {
         }
     }
 
-    private void broadcast(Message msg) {
+    private void broadcast(RunnerMessage msg) {
         logger.info("Broadcasting updated user list");
-
+      
         for (Session nextSession : runners.values()) {
             Basic remote = nextSession.getBasicRemote();
             try {
-                remote.sendText(msg.toJSON());
+               
+                remote.sendText(msg.toString());
             } catch (IOException ioe) {
                 logger.log(Level.WARNING, "Error updating a client {0} : {1}", new Object[]{remote, ioe.getMessage()});
             }

@@ -86,4 +86,9 @@ public class LoginMessage extends Message {
         return true;
     }
 
+    @Override
+    public int size() {
+        return 2;
+    }
+
 }

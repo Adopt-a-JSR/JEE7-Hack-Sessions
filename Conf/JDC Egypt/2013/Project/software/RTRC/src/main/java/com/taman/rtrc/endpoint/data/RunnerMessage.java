@@ -172,4 +172,9 @@ public class RunnerMessage extends Message {
         }
         return true;
     }
+
+    @Override
+    public int size() {
+        return 5;
+    }
 }
