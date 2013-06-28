@@ -32,7 +32,6 @@ public class MessageConverter implements Decoder.Text<Message>, Encoder.Text<Mes
 
     @Override
     public boolean willDecode(String msg) {
-
         if (!((msg != null && !msg.isEmpty())
                 && (msg.split(",").length == 2 || msg.split(",").length == 5))) {
             return false;

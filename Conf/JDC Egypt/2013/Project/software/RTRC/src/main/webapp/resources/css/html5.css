@@ -3,7 +3,7 @@
 body {
     background-color:#CCCCCC;
     font-family:Geneva,Arial,Helvetica,sans-serif;
-   
+
     margin: auto;
     margin-top: 10px;
     max-width:900px;
@@ -100,12 +100,12 @@ article {
 }
 
 article header h5 {
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	padding: 5px;
-        
-        font-size: 18px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+
+    font-size: 18px;
     margin: 0px;
     text-align:center;
     color: #fff;
@@ -126,8 +126,8 @@ footer {
 }
 
 footer h2 {
-	font-size: 14px;
-	color: white;
+    font-size: 14px;
+    color: white;
 }
 
 /* links */
@@ -149,27 +149,27 @@ table{
 }
 
 #geoContainer {
-	background-color: #888;
+    background-color: #888;
 }
 
 .geostatus {
     margin-top: 5px;
-	border-radius: 10px;
-	border:solid 2px #F47D31;
-	padding: 2px;
-	
+    border-radius: 10px;
+    border:solid 2px #F47D31;
+    padding: 2px;
+
 }
 
 .otherstatus{
-     margin-top: 5px;
-	border-radius: 10px;
-	border:solid 2px darkblue;
-	padding: 2px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border:solid 2px darkblue;
+    padding: 2px;
 }
 
 .geostatus p:hover {
-	color: white;
-	background-color: #F47D31;
+    color: white;
+    background-color: #F47D31;
 }
 
 

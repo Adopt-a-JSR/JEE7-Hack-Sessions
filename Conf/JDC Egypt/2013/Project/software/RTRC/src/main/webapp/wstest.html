@@ -1,23 +1,30 @@
 <!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
+   Author: Mohamed Mahmoud Taman.
+   Version: 1.5b
+   Description: This page is to test RTRCT application is working normally.
+                This page is modified to use jQuery lib for more productivity, 
+                and modularity cross all browsers.
 -->
 <!DOCTYPE html>
 <html>
     <head>
         <title>WebSocket Test Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="resources/js/jquery/jquery-1.4.1.js"></script>
         <script>
-           
-    var name;
-    
-    var log = function(s) {
+            $("document").ready(function() {
+                $("#sendButton").bind("click", sendData);
+            });
+
+            var log = function(s) {
                 if (document.readyState !== "complete") {
                     log.buffer.push(s);
                 } else {
-                    document.getElementById("output").textContent += (s + "\n")
+
+                    $("#output").append(s + "\n");
                 }
             }
+            
             log.buffer = [];
 
             if (this.MozWebSocket) {
@@ -25,6 +32,7 @@ and open the template in the editor.
             }
 
             url = "ws://localhost:2020/RTRC/server/register";
+
             w = new WebSocket(url);
             w.onopen = function() {
                 log("open");
@@ -32,37 +40,31 @@ and open the template in the editor.
                 w.binaryType = "arraybuffer";
 
                 // send one string and one binary message when the socket opens
-                w.send("thank you for accepting this Web Socket request");
+                w.send("thank you for accepting this Web Socket request.");
                 var a = new Uint8Array([8, 6, 7, 5, 3, 0, 9]);
                 w.send(a.buffer);
-            }
+            };
             w.onmessage = function(e) {
                 log(e.data.toString());
-                document.getElementById("inputMessage").value = "";
-            }
+            };
+            
             w.onclose = function(e) {
                 log("closed");
-            }
+            };
             w.onerror = function(e) {
                 log("error");
-            }
+            };
 
-            window.onload = function() {
+            function sendData(evt) {
                 log(log.buffer.join("\n"));
-                document.getElementById("sendButton").onclick = function() {
-                    w.send(document.getElementById("inputMessage").value);
-                }
-            }
+                w.send($("#inputMessage").attr("value"));
+                $("#inputMessage").attr("value","");
+            };
+            
         </script>
     </head>
     <body>
-        <input type="text" id="inputMessage"><button id="sendButton">Send</button>
+        <input type="text" id="inputMessage"/><button id="sendButton">Send</button>
         <pre id="output"></pre>
     </body>
 </html>
-
-
-
-
-
-

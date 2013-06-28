@@ -103,8 +103,8 @@ function checkHTML5Features() {
 // disable login button in case of websocket API is not supported
 function disableButton() {
 
-    document.getElementById("connectBtn").disabled = !isWebsocketSupported;
-    document.getElementById("loginBtn").disabled = true;
+    $("#connectBtn").attr("disabled",!isWebsocketSupported);
+    $("#loginBtn").attr("disabled", true);
 }
 
 function parseMessage(message) {
