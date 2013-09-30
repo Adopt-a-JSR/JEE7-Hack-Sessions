@@ -13,7 +13,8 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import org.glassfish.tyrus.client.ClientManager;
-import org.glassfish.tyrus.server.Server;
+import org.glassfish.tyrus.container.grizzly.GrizzlyEngine;
+import org.glassfish.tyrus.spi.TyrusServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,13 +23,15 @@ import static org.junit.Assert.*;
 /**
  *
  * @author mohamed_taman
+ * FIXME need to be tested
  */
 public class RTRCServerTest {
 
     final static Logger logger = Logger.getLogger(RTRCServerTest.class.getName());
     private static String receivedMessage;
     private static CountDownLatch messageLatch;
-    private static Server server = new Server("localhost", 2020, "/RTRC", RTRCServer.class);
+    //private static Server server = new Server("localhost", 2020, "/RTRC", );
+    private static TyrusServer server = new GrizzlyEngine().createServer("localhost/RTRC", 2020);
     private ClientManager client = ClientManager.createClient();
 
     public RTRCServerTest() {
@@ -38,8 +41,8 @@ public class RTRCServerTest {
     public static void setUpClass() {
         try {
             server.start();
-        } catch (DeploymentException ex) {
-            logger.log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RTRCServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

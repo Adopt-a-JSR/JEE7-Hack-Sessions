@@ -9,8 +9,8 @@
 <html>
     <head>
         <title>WebSocket Test Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="resources/js/jquery/jquery-1.4.1.js"></script>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="resources/js/jquery/jquery-2.0.3.min.js"></script>
         <script>
             $("document").ready(function() {
                 $("#sendButton").bind("click", sendData);
@@ -23,7 +23,7 @@
 
                     $("#output").append(s + "\n");
                 }
-            }
+            };
             
             log.buffer = [];
 

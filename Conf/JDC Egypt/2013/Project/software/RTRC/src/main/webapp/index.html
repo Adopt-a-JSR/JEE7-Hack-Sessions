@@ -3,80 +3,118 @@
     <head>
         <meta charset="UTF-8">
         <title>'Real Time Runner Champion Tracker' Web Application</title>
-        <link rel="stylesheet" href="resources/css/html5.css"/>
-        <script type="text/javascript" src="resources/js/jquery/jquery-1.4.1.js"></script>
-        <script type="text/javascript" src="resources/js/Utils.js"></script>
+        <link rel="stylesheet" href="resources/css/html5.css" type="text/css">
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp"></script>
+        <script type="text/javascript" src="resources/js/jquery/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="resources/js/Modernizr-2.6.2.js"></script>
+        <script type="text/javascript" src="resources/js/UILogic.js"></script>
     </head>
-    <body onload="checkHTML5Features(); disableButton();">
+    <body>
         <header>
-            <h1>RTRCT 2.0b Application</h1>
+            <h1>RTRCT 3.0b Application</h1>
             <h4>Live Race Data!</h4>
         </header>
-        <div id="loginContainer">
+        <!-- First page login Screen -->
+        <div id="loginPage">
             <section>
                 <article>
-                    <table>
+                <form method="post" onSubmit=" return false;">
+                    <table id="registerTbl">
                         <thead>
                             <tr>
-                                <th colspan="2" style="text-align: left">Login here:</th>
+                                <th colspan="3" style="text-align: left">Register here:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><label for="username">Username *</label></td>
-                                <td><input id="username" type="email" required autofocus placeholder="your email here!!"/></td>
+                                <td><label for="userId">User Id:</label></td>
+                                <td><span class="asterix">*</span></td>
+                                <td><input type="email" autofocus disabled required id="userId" placeholder="your email here!!" title="Email is required" size="30" maxlength="30"/></td>
                             </tr>
                             <tr>
-                                <td><label for="password">Password *</label></td>
-                                <td><input id="password" type="password" title="Password is required" required maxlength="10" placeholder="password"/></td>
+                                <td><label for="name">Name:</label></td>
+                                <td><span class="asterix">*</span></td>
+                                <td><input id="name" type="text" title="Your name is required" required maxlength="15" placeholder="Name please." size="30" disabled/></td>
                             </tr>
+                             <tr>
+                                <td><label for="latitude">Latitude:</label></td>
+                                <td><span class="asterix">*</span></td>
+                                <td><input id="latitude" type="text" title="Your latitude is required" required  placeholder="Latitude coordinate." size="30"/></td>
+                            </tr>
+                             <tr>
+                                <td><label for="longitude">Longitude:</label></td>
+                                <td><span class="asterix">*</span></td>
+                                <td><input id="longitude" type="text" title="Your longitude is required" required  placeholder="Longitude coordinate." size="30"/></td>
+                            </tr>
+                             
                             <tr>
-                                <td><button id="connectBtn">Connect</button></td>
-                                <td><button id="loginBtn">Login</button></td>
+                                <td colspan="2"><button id="connectBtn" disabled formnovalidate>Connect</button></td>
+                                <td><button id="registerBtn" disabled>Register</button></td>
 
                             </tr>
                         </tbody>
                     </table>
-                    <div id="log" style="display: none">
-                        <h3>Log</h3>
-                        <div id="info">
+                    </form>
+                    <button id="toggleLog">Show log</button>
+                    <div id="log" style="display:none">
+                        <hr>
+                        <h3>Logging Info</h3>
+                        <div id="info" style="overflow:scroll; height:140px;">
                         </div>
                     </div>
+                    
                 </article>
 
             </section> 
         </div>
-        <div id="geoContainer" style="display: none">
-
+        
+        
+        <!-- Second Page runners information Screen -->
+        <div id="RunnersInfoPage" style="display:none">
+<table width="100%">
+            <tr>
+            <td width="30%">
             <section>
                 <article>
                     <header>
-                        <h5>Your Location</h5>
+                        <h5>Your Info.</h5>
                     </header>
                     <div class="geostatus">
-                        <div>
-                            <button id="sendData">Update & Send your data</button>
-                            <button id="disconnect">Disconnect</button>
-                        </div>
-                        <p id="name">You: </p>
-                        <p id="latitude">Latitude: </p>
-                        <p id="longitude">Longitude: </p>
-                        <p id="accuracy">Accuracy: </p>
-                        <p id="timestamp">Timestamp: </p>
+                        <p id="urName"></p>
+                        <p id="curLatitude"></p>
+                        <p id="curlongitude"></p>
+                        <p id="accuracy"></p>
+                        <p id="timestamp"></p>
                     </div>
-                    <header style="margin-top: 4px;">
-                        <h5>Other Runners</h5>
+                    <hr style="margin-top: 10px;">
+                    <header style="margin-top: 10px;">
+                        <h5>Championship Info.</h5>
                     </header>
                     <div class="otherstatus" id="otherRunners">
-
+                        <p id="numOfRunners"><b># Runners:</b> 3 runners</p>
+                        <p id="distance"><b>Distance:</b> 0.4 mile, 9 mins</p>
+                        <p id="startPoint"><b>Starting:</b>401 O'Farrell St</p>
+                        <p id="endPoint"><b>Ending:</b> 899 Market St</p>
                     </div>
                 </article>
             </section>
+            <td width="100%">
+            <section>
+            <article>
+            <header id="mapHeader">
+            <h5>Runners on Map</h5>
+            <!--<div align="right"> <button id="addMarker">Add marker</button></div>-->
+            </header>
+            <div id="mapCanvas">Championship runners on Google map</div>
+            </article>
+            </section>
+            </td>
+            </tr>
+            </table>
         </div>
         <footer>
-            <h2>Powered by: HTML5, Websocket, Geolocation and Form APIs </h2>
-            <h2>            Oracle Glassfish v4_b89, Websocket API JSR(356)</h2>
-            <h2>            & JSON API JSR(353)</h2>
+            <h2>Powered by: HTML5 APIs hosted on JEE7 reference implementation 
+                            Oracle Glassfish v4.</h2>
         </footer>
     </body>
 </html>

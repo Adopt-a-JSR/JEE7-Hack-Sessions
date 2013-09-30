@@ -13,25 +13,45 @@ import javax.json.JsonWriter;
  *
  * @author mohamed_taman
  */
-public class RunnerMessage extends Message {
+public class RunnerMessage {
 
+    private String action = "UPDATE";
+    private String userId;
     private String name;
-    private double longitude;
     private double latitude;
+    private double longitude;
     private long timestamp;
-    private String notes;
+    
+     /*
+       {action: "UPDATE", userId: "New Marker", 
+        name: "Marker added", latitude:37.785054, 
+	longitude:-122.411161,timestamp:0,
+	accuracy:0};
+        * 
+        * "{\"action\":\"UPDATE\",\"message\":\"All available runneres in the system.\"}";
+      
+      */
 
     public RunnerMessage() {
     }
 
-    public RunnerMessage(String name, double longitude, double latitude, long timestamp,String notes) {
+    public RunnerMessage(String action, String userId, String name, double longitude, double latitude, long timestamp) {
+        this.action = action;
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
         this.timestamp = timestamp;
-        this.notes = notes;
+        this.userId = userId;
     }
 
+     public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+    
     public String getName() {
         return name;
     }
@@ -64,15 +84,14 @@ public class RunnerMessage extends Message {
         this.timestamp = timestamp;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    @Override
     public String toJSON() {
 
         String result = null;
@@ -80,11 +99,12 @@ public class RunnerMessage extends Message {
                 JsonWriter jsonWriter = Json.createWriter(writer)) {
 
             JsonObject object = Json.createObjectBuilder().
+                    add("action", this.getAction()).
+                    add("userId", this.getUserId()).
                     add("name", this.getName()).
-                    add("longitude", this.getLongitude()).
                     add("latitude", this.getLatitude()).
-                    add("timestamp", this.getTimestamp()).
-                     add("notes", this.getNotes())
+                    add("longitude", this.getLongitude()).
+                    add("timestamp", this.getTimestamp())
                     .build();
 
             jsonWriter.writeObject(object);
@@ -97,7 +117,7 @@ public class RunnerMessage extends Message {
         return result;
     }
 
-    public static Message fromJSON(String jsonValue) {
+    public static RunnerMessage fromJSON(String jsonValue) {
 
         RunnerMessage data = new RunnerMessage();
 
@@ -121,8 +141,11 @@ public class RunnerMessage extends Message {
                     case "timestamp":
                         data.setTimestamp(newObj.getJsonNumber(key).longValue());
                         break;
-                    case "notes":
-                        data.setNotes(newObj.getString(key));
+                        case "action":
+                        data.setAction(newObj.getString(key));
+                        break;
+                    case "userId":
+                        data.setUserId(newObj.getString(key));
                 
                 }
             }
@@ -132,7 +155,7 @@ public class RunnerMessage extends Message {
 
     @Override
     public String toString() {
-        return "RunnerMessage{" + "name=" + name + ", longitude=" + longitude + ", latitude=" + latitude + ", timestamp=" + timestamp + ",  notes=" + notes + '}';
+        return "RunnerMessage{" + "name=" + name + ", longitude=" + longitude + ", latitude=" + latitude + ", timestamp=" + timestamp + ",  userId=" + userId + '}';
     }
 
     @Override
@@ -142,7 +165,7 @@ public class RunnerMessage extends Message {
         hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
         hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
         hash = 89 * hash + (int) (this.timestamp ^ (this.timestamp >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.notes);
+        hash = 89 * hash + Objects.hashCode(this.userId);
         return hash;
     }
 
@@ -167,14 +190,9 @@ public class RunnerMessage extends Message {
         if (this.timestamp != other.timestamp) {
             return false;
         }
-        if (!Objects.equals(this.notes, other.notes)) {
+        if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public int size() {
-        return 5;
     }
 }

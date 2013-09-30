@@ -13,43 +13,31 @@ import javax.websocket.EndpointConfig;
  * @author mohamed_taman
  * @version 1.2
  */
-public class MessageConverter implements Decoder.Text<Message>, Encoder.Text<Message> {
+public class MessageConverter implements Decoder.Text<RunnerMessage>, Encoder.Text<RunnerMessage> {
 
-    private int size = 0;
-    Logger log = Logger.getLogger(this.getClass().getName());
+    private Logger log = Logger.getLogger(this.getClass().getName());
 
     @Override
     public void init(EndpointConfig ec) {
-        log.info("I am Initialized");
+        log.info("Messages Decoder/Encoder: Is Initialized..");
     }
 
     @Override
-    public String encode(Message msg) throws EncodeException {
-        log.info(msg.toString());
+    public String encode(RunnerMessage msg) throws EncodeException {
+        log.info(msg.toJSON());
         return msg.toJSON();
 
     }
 
     @Override
     public boolean willDecode(String msg) {
-        if (!((msg != null && !msg.isEmpty())
-                && (msg.split(",").length == 2 || msg.split(",").length == 5))) {
-            return false;
-        }
-        size = msg.split(",").length;
         return true;
     }
 
     @Override
-    public Message decode(String msg) throws DecodeException {
+    public RunnerMessage decode(String msg) throws DecodeException {
 
-        Message message = null;
-
-        if (size == 2) {
-            message = LoginMessage.fromJSON(msg);
-        } else {
-            message = RunnerMessage.fromJSON(msg);
-        }
+        RunnerMessage message = RunnerMessage.fromJSON(msg);
 
         return message;
     }

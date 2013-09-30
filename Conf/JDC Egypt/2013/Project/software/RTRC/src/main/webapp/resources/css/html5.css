@@ -43,6 +43,8 @@ h4 {
     background-color: #fff;
     -webkit-box-shadow: 2px 2px 20px #888;
     -webkit-transform: rotate(-45deg);
+	-moz-box-shadow: 2px 2px 20px #888;
+    -moz-transform: rotate(-45deg);
     position: absolute;
     padding: 0px 150px;
     top: 50px;
@@ -92,7 +94,7 @@ article {
     height: 470px;
     background-color: #eee;
     display:block;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -139,16 +141,8 @@ a:hover {
     text-decoration: underline;
 }
 
-table{
-    background-color: #CCCCCC;
-    margin: 10px;
-    padding: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-}
 
-#geoContainer {
+#RunnersInfoPage {
     background-color: #888;
 }
 
@@ -157,19 +151,90 @@ table{
     border-radius: 10px;
     border:solid 2px #F47D31;
     padding: 2px;
+	font-size:13px;
+	-webkit-border-radius: 0px 10px 0px 10px;
+    -moz-border-radius: 0px 10px 0px 10px;
 
 }
 
 .otherstatus{
     margin-top: 5px;
     border-radius: 10px;
-    border:solid 2px darkblue;
+    border:solid 2px #F47D20;
     padding: 2px;
+	font-size:13px;
+	-webkit-border-radius: 0px 10px 0px 10px;
+    -moz-border-radius: 0px 10px 0px 10px;
 }
 
 .geostatus p:hover {
     color: white;
     background-color: #F47D31;
 }
+
+/* Login box properties */
+table#registerTbl{
+    background-color: #CCCCCC;
+    margin: 20px;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* add astrix color and properties to be red */
+.asterix{
+	color: red;
+    font-size: medium;
+	padding-right:10px;
+	padding-left:2px;
+}
+
+/* Default HTML5 input validation pseudoclasses */
+input:valid {
+border: 1px solid green;
+}
+
+input:focus:invalid {
+border: 1px solid red;
+}
+
+/* Add inout field contents padding and makes its birders has a rounded corners. */
+input{
+	padding: 3px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+	border-radius:7px;
+	
+}
+
+/*Formating the log area*/
+
+#log {
+	padding-top:10px;
+	font-size:12px;
+}
+
+
+/*
+
+CSSs for the second page
+
+*/
+#mapHeader{
+	 padding-right: 3px;
+	-webkit-border-radius: 7px 7px 0px 0px;
+    -moz-border-radius: 7px 7px 7px 7px;
+}
+
+#mapCanvas{
+	width:100%;
+	height:93%;
+	margin-top: 3px;
+    border:solid 2px #F47D31;
+	-webkit-border-radius: 0px 0px 10px 10px;
+    -moz-border-radius: 0px 0px 10px 10px;
+}
+
 
 
