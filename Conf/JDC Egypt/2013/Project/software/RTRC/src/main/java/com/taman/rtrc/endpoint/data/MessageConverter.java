@@ -37,6 +37,7 @@ public class MessageConverter implements Decoder.Text<RunnerMessage>, Encoder.Te
     @Override
     public RunnerMessage decode(String msg) throws DecodeException {
 
+        System.out.println(msg);
         RunnerMessage message = RunnerMessage.fromJSON(msg);
 
         return message;

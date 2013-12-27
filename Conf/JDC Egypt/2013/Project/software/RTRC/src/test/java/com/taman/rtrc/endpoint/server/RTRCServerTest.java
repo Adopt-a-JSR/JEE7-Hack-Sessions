@@ -8,13 +8,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.ClientEndpoint;
+import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.WebSocketContainer;
 import org.glassfish.tyrus.client.ClientManager;
-import org.glassfish.tyrus.container.grizzly.GrizzlyEngine;
-import org.glassfish.tyrus.spi.TyrusServer;
+import org.glassfish.tyrus.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,9 +31,13 @@ public class RTRCServerTest {
     final static Logger logger = Logger.getLogger(RTRCServerTest.class.getName());
     private static String receivedMessage;
     private static CountDownLatch messageLatch;
-    //private static Server server = new Server("localhost", 2020, "/RTRC", );
-    private static TyrusServer server = new GrizzlyEngine().createServer("localhost/RTRC", 2020);
-    private ClientManager client = ClientManager.createClient();
+    private static final int port = 3030;
+    private static final String hostName = "localhost";
+    private static final String root = "RTRCT";
+    private static Server server = null;
+    
+    private static ClientManager client = null;
+    WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 
     public RTRCServerTest() {
     }
@@ -40,8 +45,11 @@ public class RTRCServerTest {
     @BeforeClass
     public static void setUpClass() {
         try {
+            server = new Server(hostName, port, root,null,RTRCServer.class );
+            client = ClientManager.createClient();
+            
             server.start();
-        } catch (IOException ex) {
+        } catch (DeploymentException ex) {
             Logger.getLogger(RTRCServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -57,8 +65,8 @@ public class RTRCServerTest {
             messageLatch = new CountDownLatch(1);
             receivedMessage = null;
             String message = "Connected to RTRC server.";
-
-            client.connectToServer(new RTRClientRunnerData(), new URI("ws://localhost:2020/RTRC/server/register"));
+container.connectToServer(new RTRClientRunnerData(), new URI("ws://"+hostName+":"+port+"/"+root+"/server/runners/engage"));
+            //client.connectToServer(new RTRClientRunnerData(), new URI("ws://"+hostName+":"+port+"/"+root+"/server/runners/engage"));
 
             messageLatch.await(5, TimeUnit.SECONDS);
             
@@ -66,6 +74,8 @@ public class RTRCServerTest {
 
         } catch (InterruptedException | URISyntaxException | DeploymentException ex) {
             logger.log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RTRCServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,7 +87,7 @@ public class RTRCServerTest {
             
             String message = "Connected to RTRC server.";
             
-            client.connectToServer(RTRClientLogin.class, new URI("ws://localhost:2020/RTRC/server/register"));
+            client.connectToServer(RTRClientLogin.class, new URI("ws://"+hostName+":"+port+"/"+root+"/server/runners/engage"));
 
             messageLatch.await(5, TimeUnit.SECONDS);
 
@@ -86,6 +96,8 @@ public class RTRCServerTest {
 
         } catch (InterruptedException | URISyntaxException | DeploymentException ex) {
             logger.log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RTRCServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

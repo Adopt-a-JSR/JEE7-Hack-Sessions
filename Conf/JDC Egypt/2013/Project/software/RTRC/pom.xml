@@ -12,7 +12,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.j2eeVersion>1.7</netbeans.hint.j2eeVersion>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server>
         <webapp.databaseTempDir>/temp</webapp.databaseTempDir>
     </properties>
 
@@ -33,24 +33,25 @@
         <dependency>  
             <groupId>org.glassfish</groupId> 
             <artifactId>javax.json</artifactId> 
-            <version>1.0.2</version> 
+            <version>1.0.4</version> 
             <type>jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
+    <groupId>org.glassfish.tyrus</groupId>
+    <artifactId>tyrus-container-grizzly-server</artifactId>
+    <version>1.3.3</version>
+    <type>jar</type>
+            <scope>test</scope>
+</dependency>
+         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-client</artifactId>
-            <version>1.2.1</version>
+            <artifactId>tyrus-container-grizzly-client</artifactId>
+            <version>1.3.3</version>
             <type>jar</type>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.tyrus</groupId>
-            <artifactId>tyrus-container-grizzly</artifactId>
-            <version>1.2.1</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
+       
     </dependencies>
 
     <build>

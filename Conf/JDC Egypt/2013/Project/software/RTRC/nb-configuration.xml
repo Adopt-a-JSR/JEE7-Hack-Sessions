@@ -17,6 +17,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-whitelist.whitelist-oracle>false</org-netbeans-modules-whitelist.whitelist-oracle>
     </properties>
     <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+        <word>Google</word>
         <word>RTRCT</word>
         <word>Websocket</word>
     </spellchecker-wordlist>
